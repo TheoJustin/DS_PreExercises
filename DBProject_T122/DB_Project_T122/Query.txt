@@ -1,0 +1,492 @@
+-- catatan buat pengoreksi (karena dummy data kadang gak sesuai sama yang ada di query, beberapa nomer yang telah didisplay dalam query ada yang kosong)
+
+
+CREATE TABLE ROLES (
+  Role_Id VARCHAR(255) PRIMARY KEY,
+  Role_Position VARCHAR(255),
+  Role_Name VARCHAR(255)
+);
+
+CREATE TABLE STAFF (
+  Staff_Id VARCHAR(255) PRIMARY KEY,
+  Staff_Name VARCHAR(255),
+  Staff_PhoneNumber VARCHAR(255),
+  Staff_Address VARCHAR(255),
+  Staff_Sales INT,
+  Role_Id VARCHAR(255),
+  Staff_Salary INT,
+  Staff_HiredDate DATE
+);
+
+CREATE TABLE payments (
+  Payment_Id VARCHAR(255) PRIMARY KEY,
+  Payment_Name VARCHAR(255)
+);
+
+CREATE TABLE manga (
+  Manga_Id VARCHAR(255) PRIMARY KEY,
+  Genre_Id VARCHAR(255),
+  Manga_Name VARCHAR(255),
+  Manga_Chapters INT,
+  Manga_Author VARCHAR(255),
+  Manga_Price DECIMAL(10, 2),
+  Manga_Rating DECIMAL(3, 2)
+);
+
+CREATE TABLE transactions (
+  Transaction_Id VARCHAR(255) PRIMARY KEY,
+  Store_Id VARCHAR(255),
+  Staff_Id VARCHAR(255),
+  Customer_Id VARCHAR(255),
+  Transaction_date DATE,
+  Manga_Id VARCHAR(255),
+  Transaction_ChapterBought INT,
+  Payment_Id VARCHAR(255)
+);
+
+CREATE TABLE genres (
+  Genre_Id VARCHAR(255) PRIMARY KEY,
+  Genre_Name VARCHAR(255)
+);
+
+CREATE TABLE stores (
+  Store_Id VARCHAR(255) PRIMARY KEY,
+  Store_Name VARCHAR(255),
+  Store_Address VARCHAR(255)
+);
+
+CREATE TABLE customers (
+  Customer_Id VARCHAR(255) PRIMARY KEY,
+  Customer_Name VARCHAR(255),
+  Customer_PhoneNumber VARCHAR(255),
+  Customer_Address VARCHAR(255)
+);
+
+INSERT INTO customers (Customer_Id, Customer_Name, Customer_PhoneNumber, Customer_Address)
+VALUES
+  ('CS123', 'Emma', '98765432101', '123 Main St, City'),
+  ('CS234', 'Benjamin', '87654321012', '456 Elm St, Town'),
+  ('CS345', 'Olivia', '76543210923', '789 Oak St, Village'),
+  ('CS456', 'William', '65432109834', '321 Pine St, City'),
+  ('CS567', 'Ava', '54321098745', '654 Maple St, Town'),
+  ('CS678', 'Mia', '43210987656', '987 Birch St, Village'),
+  ('CS789', 'Alexander', '32109876567', '123 Cedar St, City'),
+  ('CS890', 'Sophia', '21098765478', '456 Walnut St, Town'),
+  ('CS901', 'Noah', '10987654389', '789 Pine St, Village'),
+  ('CS012', 'Isabella', '09876543290', '321 Oak St, City'),
+  ('CS124', 'Liam', '98765432901', '654 Elm St, Town'),
+  ('CS235', 'Amelia', '87654321802', '987 Maple St, Village'),
+  ('CS346', 'Ethan', '76543210713', '123 Birch St, City'),
+  ('CS457', 'Mia', '65432109624', '456 Cedar St, Town'),
+  ('CS568', 'Olivia', '54321098535', '789 Walnut St, Village'),
+  ('CS679', 'James', '43210987456', '321 Pine St, City'),
+  ('CS780', 'Charlotte', '32109876367', '654 Maple St, Town'),
+  ('CS891', 'Oliver', '21098765278', '987 Oak St, Village'),
+  ('CS902', 'Amelia', '10987654189', '123 Elm St, City'),
+  ('CS013', 'Sophia', '09876543090', '456 Birch St, Town');
+
+
+INSERT INTO stores (Store_Id, Store_Name, Store_Address)
+VALUES
+  ('SE123', 'Tranquil Treasures', '123 Main St, City A123'),
+  ('SE234', 'Serendipity Books', '456 Elm St, Town B456'),
+  ('SE345', 'Whispering Pages', '789 Oak St, Village C789'),
+  ('SE456', 'Enchanted Reads', '321 Pine St, City A123'),
+  ('SE567', 'Mystical Books', '654 Maple St, Town B456'),
+  ('SE678', 'Secret Library', '987 Birch St, Village C789'),
+  ('SE789', 'Dreamland Books', '123 Cedar St, City A123'),
+  ('SE890', 'Twilight Tales', '456 Walnut St, Town B456'),
+  ('SE901', 'Elysian Emporium', '789 Pine St, Village C789'),
+  ('SE012', 'Whimsical Words', '321 Oak St, City A123'),
+  ('SE124', 'Arcane Books', '654 Elm St, Town B456'),
+  ('SE235', 'Everlasting Reads', '987 Maple St, Village C789'),
+  ('SE346', 'Seraphic Stories', '123 Birch St, City A123'),
+  ('SE457', 'Enigma Bookshop', '456 Cedar St, Town B456'),
+  ('SE568', 'Ethereal Pages', '789 Walnut St, Village C789'),
+  ('SE679', 'Celestial Library', '123 Pine St, City A123'),
+  ('SE780', 'Enchanted Tales', '456 Maple St, Town B456'),
+  ('SE892', 'Whispers of Wonder', '789 Oak St, Village C789'),
+  ('SE903', 'Enchanted Garden Books', '123 Elm St, City A123'),
+  ('SE014', 'Boundless Books', '456 Birch St, Town B456'),
+  ('SE126', 'Secret Haven', '789 Cedar St, Village C789'),
+  ('SE236', 'Mystic Maze Books', '123 Walnut St, City A123'),
+  ('SE347', 'Serene Sanctuary', '456 Pine St, Town B456'),
+  ('SE458', 'Enigmatic Escapades', '789 Maple St, Village C789'),
+  ('SE569', 'Wandering Words', '123 Oak St, City A123');
+
+
+INSERT INTO genres (Genre_Id, Genre_Name)
+VALUES
+  ('GE001', 'Action'),
+  ('GE002', 'Fantasy'),
+  ('GE003', 'Romance'),
+  ('GE004', 'Sports'),
+  ('GE005', 'Comedy'),
+  ('GE006', 'Horror'),
+  ('GE007', 'Sci-Fi'),
+  ('GE008', 'Mystery'),
+  ('GE009', 'Drama');
+
+
+INSERT INTO transactions (Transaction_Id, Store_Id, Staff_Id, Customer_Id, Transaction_date, Manga_Id, Transaction_ChapterBought, Payment_Id)
+VALUES
+  ('TR001', 'SE123', 'ST122', 'CS123', '2022-03-01', 'MG124', 2, 'P001'),
+  ('TR002', 'SE234', 'ST234', 'CS234', '2022-03-02', 'MG235', 3, 'P002'),
+  ('TR003', 'SE345', 'ST145', 'CS345', '2022-03-03', 'MG346', 1, 'P001'),
+  ('TR004', 'SE456', 'ST456', 'CS456', '2022-03-04', 'MG457', 4, 'P002'),
+  ('TR005', 'SE567', 'ST567', 'CS567', '2022-03-05', 'MG568', 2, 'P001'),
+  ('TR006', 'SE678', 'ST618', 'CS678', '2022-03-06', 'MG679', 1, 'P002'),
+  ('TR007', 'SE789', 'ST589', 'CS789', '2022-03-07', 'MG780', 3, 'P001'),
+  ('TR008', 'SE890', 'ST880', 'CS890', '2022-03-08', 'MG891', 2, 'P002'),
+  ('TR009', 'SE901', 'ST911', 'CS901', '2022-03-09', 'MG902', 1, 'P001'),
+  ('TR010', 'SE012', 'ST112', 'CS012', '2022-03-10', 'MG013', 4, 'P002'),
+  ('TR011', 'SE123', 'ST123', 'CS123', '2022-03-11', 'MG123', 2, 'P001'),
+  ('TR012', 'SE234', 'ST334', 'CS234', '2022-03-12', 'MG234', 1, 'P002'),
+  ('TR013', 'SE345', 'ST345', 'CS345', '2022-03-13', 'MG345', 3, 'P001'),
+  ('TR014', 'SE456', 'ST556', 'CS456', '2022-03-14', 'MG456', 2, 'P002'),
+  ('TR015', 'SE567', 'ST167', 'CS567', '2022-03-15', 'MG790', 1, 'P001'),
+  ('TR016', 'SE678', 'ST678', 'CS678', '2022-03-16', 'MG678', 4, 'P002'),
+  ('TR017', 'SE789', 'ST789', 'CS789', '2022-03-17', 'MG789', 3, 'P001'),
+  ('TR018', 'SE890', 'ST890', 'CS890', '2022-03-18', 'MG890', 1, 'P002'),
+  ('TR019', 'SE901', 'ST901', 'CS901', '2022-03-19', 'MG901', 2, 'P001'),
+  ('TR020', 'SE012', 'ST012', 'CS012', '2022-03-20', 'MG902', 4, 'P002'),
+  ('TR021', 'SE123', 'ST122', 'CS123', '2022-03-21', 'MG123', 1, 'P001'),
+  ('TR022', 'SE234', 'ST234', 'CS234', '2022-03-22', 'MG234', 3, 'P002'),
+  ('TR023', 'SE345', 'ST145', 'CS345', '2022-03-23', 'MG345', 2, 'P001'),
+  ('TR024', 'SE456', 'ST456', 'CS456', '2022-03-24', 'MG456', 1, 'P002'),
+  ('TR025', 'SE567', 'ST567', 'CS567', '2022-03-25', 'MG567', 4, 'P001');
+
+
+INSERT INTO manga (Manga_Id, Genre_Id, Manga_Name, Manga_Chapters, Manga_Author, Manga_Price, Manga_Rating)
+VALUES
+  ('MG124', 'GE001', 'Attack on Titans', 45, 'Hajime Isayama', 39999.00, 4.70),
+  ('MG235', 'GE002', 'One Piece', 1025, 'Eiichiro Oda', 19999.00, 4.90),
+  ('MG346', 'GE003', 'Fruits Basket', 40, 'Natsuki Takaya', 14999.00, 4.50),
+  ('MG457', 'GE004', 'Haikyuu!!', 50, 'Haruichi Furudate', 12999.00, 4.70),
+  ('MG568', 'GE005', 'Gintama', 150, 'Hideaki Sorachi', 17999.00, 4.40),
+  ('MG679', 'GE006', 'Attack on Titans: Before the Fall', 25, 'Hajime Isayama', 24999.00, 4.20),
+  ('MG780', 'GE006', 'Tokyo Ghoul', 30, 'Sui Ishida', 18999.00, 4.60),
+  ('MG891', 'GE006', 'Your Lie in April', 20, 'Naoshi Arakawa', 11999.00, 4.30),
+  ('MG902', 'GE002', 'Naruto', 250, 'Masashi Kishimoto', 29999.00, 4.90),
+  ('MG013', 'GE003', 'Kimi ni Todoke', 35, 'Karuho Shiina', 13999.00, 4.20),
+  ('MG123', 'GE001', 'My Hero Academia', 200, 'Kohei Horikoshi', 26999.00, 4.80),
+  ('MG234', 'GE002', 'Berserk', 40, 'Kentaro Miura', 17999.00, 4.70),
+  ('MG345', 'GE003', 'Nana', 80, 'Ai Yazawa', 14999.00, 4.50),
+  ('MG456', 'GE004', 'Slam Dunk', 31, 'Takehiko Inoue', 12999.00, 4.60),
+  ('MG790', 'GE005', 'One Punch Man', 40, 'Yusuke Murata', 14999.00, 4.20),
+  ('MG678', 'GE007', 'Ghost in the Shell', 20, 'Masamune Shirow', 14999.00, 4.20),
+  ('MG789', 'GE006', 'Junji Ito''s Uzumaki', 12, 'Junji Ito', 9999.00, 4.70),
+  ('MG890', 'GE009', 'Vagabond', 37, 'Takehiko Inoue', 14999.00, 4.50);
+
+
+INSERT INTO payments (Payment_Id, Payment_Name)
+VALUES
+  ('P001', 'Cash'),
+  ('P002', 'Credit Card');
+
+
+INSERT INTO ROLES (Role_Id, Role_Position, Role_Name)
+VALUES
+  ('RL001', 'SalesPerson', 'Staff'),
+  ('RL002', 'Manager', 'Staff');
+
+
+INSERT INTO STAFF (Staff_Id, Staff_Name, Staff_PhoneNumber, Staff_Address, Staff_Sales, Role_Id, Staff_Salary, Staff_HiredDate)
+VALUES
+  ('ST122', 'John Smith', '98765432101', '123 Main St, City', 10, 'RL002', 50000, '2020-01-02'),
+  ('ST234', 'Emily Johnson', '87654321012', '456 Elm St, Town', 8, 'RL001', 40000, '2020-02-03'),
+  ('ST145', 'Michael Davis', '76543210923', '789 Oak St, Village', 12, 'RL001', 40000, '2020-03-21'),
+  ('ST456', 'Jessica Anderson', '65432109834', '321 Pine St, City', 15, 'RL002', 50000, '2020-04-01'),
+  ('ST567', 'David Wilson', '54321098745', '654 Maple St, Town', 6, 'RL001', 40000, '2020-05-01'),
+  ('ST618', 'Sarah Thompson', '43210987656', '987 Birch St, Village', 9, 'RL001', 40000, '2020-06-21'),
+  ('ST589', 'Christopher Clark', '32109876567', '123 Cedar St, City', 11, 'RL002', 50000, '2020-07-12'),
+  ('ST880', 'Jennifer Turner', '21098765478', '456 Walnut St, Town', 7, 'RL001', 40000, '2020-08-23'),
+  ('ST911', 'Matthew White', '10987654389', '789 Pine St, Village', 14, 'RL001', 40000, '2020-09-23'),
+  ('ST112', 'Amanda Hill', '09876543290', '321 Oak St, City', 8, 'RL002', 50000, '2020-10-11'),
+  ('ST123', 'Andrew Phillips', '98765432901', '654 Elm St, Town', 10, 'RL001', 40000, '2020-11-15'),
+  ('ST334', 'Stephanie Rodriguez', '87654321802', '987 Maple St, Village', 15, 'RL001', 40000, '2020-12-27'),
+  ('ST345', 'Jason Lee', '76543210713', '123 Birch St, City', 6, 'RL002', 50000, '2021-01-25'),
+  ('ST556', 'Lauren Davis', '65432109624', '456 Cedar St, Town', 9, 'RL001', 40000, '2021-02-20'),
+  ('ST167', 'Eric Anderson', '54321098535', '789 Walnut St, Village', 11, 'RL001', 40000, '2021-03-26'),
+  ('ST678', 'Samantha Wilson', '43210987456', '321 Pine St, City', 8, 'RL002', 50000, '2021-04-19'),
+  ('ST789', 'Kevin Thompson', '32109876367', '654 Maple St, Town', 9, 'RL001', 40000, '2021-05-02'),
+  ('ST890', 'Rachel Clark', '21098765278', '987 Oak St, Village', 4, 'RL002', 40000, '2021-06-06'),
+  ('ST901', 'Benjamin Turner', '10987654189', '123 Elm St, City', 7, 'RL002', 50000, '2021-07-08'),
+  ('ST012', 'Olivia White', '09876543090', '456 Birch St, Town', 3, 'RL002', 40000, '2021-08-09');
+
+-- no 1
+SELECT Manga_Name AS Title, Manga_Author AS author, Manga_Price AS Price
+FROM manga
+WHERE Manga_Rating > 3.3
+
+-- no 2
+SELECT *
+FROM manga
+WHERE Manga_Chapters > (SELECT
+AVG(Manga_Chapters)
+FROM manga
+)
+
+-- no 3
+UPDATE Staff
+SET Staff_Salary = Staff_Salary + (Staff_Salary*0.1);
+
+SELECT *
+FROM STAFF;
+
+-- no 4
+ALTER TABLE staff
+MODIFY COLUMN Staff_HiredDate VARCHAR(13);
+
+-- cara lain (karena datatype date ke varchar itu gabisa)
+CREATE TABLE staff_temp (
+  Staff_Id VARCHAR(255) PRIMARY KEY,
+  Staff_Name VARCHAR(255),
+  Staff_PhoneNumber VARCHAR(255),
+  Staff_Address VARCHAR(255),
+  Staff_Sales INT,
+  Role_Id VARCHAR(255),
+  Staff_Salary INT,
+  Staff_HiredDate VARCHAR(13)
+);
+
+INSERT INTO staff_temp (Staff_Id, Staff_Name, Staff_PhoneNumber, Staff_Address, Staff_Sales, Role_Id, Staff_Salary, Staff_HiredDate)
+SELECT Staff_Id, Staff_Name, Staff_PhoneNumber, Staff_Address, Staff_Sales, Role_Id, Staff_Salary, strftime('%Y-%m-%d', Staff_HiredDate)
+FROM staff;
+
+DROP TABLE staff;
+ALTER TABLE staff_temp RENAME TO staff;
+
+select * from staff
+
+-- no 5
+SELECT *
+FROM transactions TD
+JOIN manga ON TD.Manga_Id = manga.Manga_Id
+WHERE Manga_Author LIKE '%i'
+
+-- no 6
+SELECT CS.Customer_Id, CS.Customer_Name, COUNT(TH.Customer_Id) AS Total_transactions
+FROM transactions TH
+JOIN customers CS ON TH.Customer_Id = CS.Customer_Id
+WHERE MONTH(TH.Transaction_date) > 6 AND LEN(CS.Customer_Name) < 16
+GROUP BY CS.Customer_Id, CS.Customer_Name;
+
+-- no 7
+SELECT TOP 10 Staff_Name, Transaction_Id, Customer_Name
+FROM transactions TH
+JOIN staff ON TH.Staff_Id = staff.Staff_Id
+JOIN customers ON TH.Customer_Id = customers.Customer_Id
+WHERE LEN(Customer_Name)%2 = 1
+ORDER BY Staff_Salary;
+
+-- no 8
+WITH MangaTotals AS (
+  SELECT COUNT(TH.Manga_Id) AS Total, Manga_Name, Manga_Price
+  FROM Transactions TH
+  JOIN manga ON TH.Manga_Id = manga.Manga_Id
+  GROUP BY Manga_Name, Manga_Price
+)
+SELECT TOP 10 TD.Total, TD.Manga_Name, TD.Manga_Price
+FROM MangaTotals AS TD
+JOIN manga ON TD.Manga_Name = manga.Manga_Name AND TD.Manga_Price = manga.Manga_Price
+ORDER BY TD.Total DESC;
+
+-- no 9
+SELECT T.Transaction_Id, S.Staff_Name, R.Role_Id, S.Staff_HiredDate, ST.Store_Address
+FROM transactions T
+JOIN STAFF S ON T.Staff_Id = S.Staff_Id
+JOIN stores ST ON T.Store_Id = ST.Store_Id
+JOIN ROLES R ON S.Role_Id = R.Role_Id
+WHERE MONTH(T.Transaction_date) > 2 AND R.Role_Position LIKE 'Manager' AND ST.Store_Name LIKE '%i%' AND S.Staff_PhoneNumber LIKE '%[1|3|5|7|9]';
+
+-- no 10
+SELECT *
+FROM customers
+JOIN transactions ON customers.Customer_Id = transactions.Customer_Id
+WHERE customers.Customer_Id IN (
+  SELECT transactions.Customer_Id
+  FROM transactions
+  GROUP BY transactions.Customer_Id
+  HAVING COUNT(transactions.Customer_Id) < 2
+) AND SUBSTRING(transactions.Staff_Id, 3, LEN(transactions.Staff_Id)) LIKE '%[02468]';
+
+-- no 11
+SELECT g.Genre_Id, Genre_Name
+FROM genres g
+WHERE Genre_Id IN (
+  SELECT g.Genre_Id
+  FROM transactions t JOIN manga m 
+  ON t.Manga_Id = m.Manga_Id
+  JOIN genres g 
+  ON m.Genre_Id = g.Genre_Id
+  GROUP BY g.Genre_Id
+  HAVING COUNT(m.Manga_Id) > 4
+)
+
+-- no 12
+CREATE VIEW [Best_Senior_Staff]
+AS
+  SELECT Staff_Name, Staff_Salary, Staff_Sales
+  FROM STAFF
+  WHERE Staff_Id IN (
+    SELECT T.Staff_Id
+    FROM transactions T
+    JOIN manga M ON T.manga_id = M.manga_id
+    GROUP BY T.Staff_Id
+    HAVING SUM(M.Manga_Price) > 100000
+  ) AND LEFT(Staff_Address, 3) LIKE '%[13579]' AND YEAR(Staff_HiredDate) < 2023
+
+-- no 13
+SELECT TOP 5 c.Customer_Name, c.Customer_Id, t.Transaction_date, m.Manga_Name, m.Manga_Rating
+FROM transactions t
+JOIN customers c ON t.Customer_Id = c.Customer_Id
+JOIN manga m ON t.Manga_Id = m.Manga_Id
+WHERE m.Manga_Rating > (
+    SELECT AVG(Manga_Rating)
+    FROM manga
+) AND MONTH(t.Transaction_date) > 5
+ORDER BY c.Customer_Id, t.Transaction_date DESC;
+
+
+-- no 14
+SELECT c.Customer_Name AS CustomerName, c.Customer_Address AS CustomerAddress, t.Transaction_date AS TransactionDate
+FROM customers c
+JOIN transactions t ON c.Customer_Id = t.Customer_Id
+WHERE MONTH(t.Transaction_date) = 12 AND DAY(t.Transaction_date) > 24 AND t.Transaction_ChapterBought > (
+  SELECT AVG(Transaction_ChapterBought) + 1
+  FROM transactions
+);
+
+-- no 15
+SELECT s.Staff_Name AS StaffName, s.Staff_Address AS StaffAddress
+FROM staff s
+JOIN transactions t ON t.Staff_Id = s.Staff_Id
+JOIN payments p ON p.Payment_Id = t.Payment_Id
+WHERE DATENAME(WEEKDAY, t.Transaction_date) = 'Monday'
+  AND p.Payment_Name LIKE '%Debit%'
+GROUP BY s.Staff_Name, s.Staff_Address
+HAVING SUM(s.Staff_Sales) > (
+    SELECT AVG(Staff_Sales)
+    FROM staff
+);
+
+
+-- no 16
+SELECT c.Customer_Id AS CustomerID, SUBSTRING(c.Customer_Name, 1, CHARINDEX(' ', c.Customer_Name) - 1) AS FirstName
+FROM customers c
+JOIN transactions t ON c.Customer_Id = t.Customer_Id
+JOIN staff s ON t.Staff_Id = s.Staff_Id
+JOIN manga m ON t.Manga_Id = m.Manga_Id
+WHERE s.Staff_Salary > (
+  SELECT AVG(Staff_Salary)
+  FROM staff
+) AND m.Manga_Chapters > (
+  SELECT MIN(Manga_Chapters) + 200
+  FROM manga
+) AND DATEDIFF(MONTH, t.Transaction_date, GETDATE()) = 10
+
+-- no 17
+SELECT 
+  SUM(m.Manga_Price) AS "Total manga bought price",
+  COUNT(t.Manga_Id) AS "Total manga bought times",
+  SUBSTRING(m.Manga_Id, LEN(m.Manga_Id) - 2, 3) AS id,
+  'Highest manga price' AS description
+FROM 
+  manga m
+JOIN 
+  transactions t ON m.Manga_Id = t.Manga_Id
+WHERE 
+  m.Manga_Price <= (
+    SELECT MAX(Manga_Price)
+    FROM manga
+  )
+  AND ASCII(RIGHT(m.Manga_Author, 1)) < 100
+GROUP BY 
+  m.Manga_Id
+UNION
+SELECT 
+  SUM(m.Manga_Price) AS "Total manga bought price",
+  COUNT(t.Manga_Id) AS "Total manga bought times",
+  SUBSTRING(m.Manga_Id, LEN(m.Manga_Id) - 2, 3) AS id,
+  'Lowest manga rating' AS description
+FROM 
+  manga m
+JOIN 
+  transactions t ON m.Manga_Id = t.Manga_Id
+WHERE 
+  m.Manga_Rating >= (
+    SELECT MIN(Manga_Rating) + 2.2
+    FROM manga
+  )
+  AND ASCII(RIGHT(m.Manga_Author, 1)) > 100
+GROUP BY 
+  m.Manga_Id
+
+
+-- no 18
+SELECT
+  s.Store_Address AS StoreAddress,
+  CONCAT('$', ROUND(SUM(m.Manga_Price) / COUNT(DISTINCT t.Transaction_Id), 2)) AS "Average Income",
+  COUNT(DISTINCT t.Transaction_Id) AS "Total Transactions"
+FROM
+  stores s
+JOIN
+  transactions t ON s.Store_Id = t.Store_Id
+JOIN
+  staff st ON t.Staff_Id = st.Staff_Id
+JOIN
+  manga m ON t.Manga_Id = m.Manga_Id
+WHERE
+  DATENAME(WEEKDAY, st.Staff_HiredDate) = 'Tuesday'
+  AND SUBSTRING(s.Store_Id, LEN(s.Store_Id), 1) % 2 = 1
+GROUP BY
+  s.Store_Address;
+
+-- no 19
+SELECT
+  c.Customer_Id AS CustomerID,
+  SUBSTRING(c.Customer_Name, CHARINDEX(' ', REVERSE(c.Customer_Name)) + 2, LEN(c.Customer_Name)) AS LastName,
+  AVG(t.TotalMoneySpent) AS "Average Money Spent/customer"
+FROM
+  customers c
+JOIN
+  (
+    SELECT
+      t.Customer_Id,
+      t.Payment_Id,
+      SUM(m.Manga_Price) AS TotalMoneySpent
+    FROM
+      transactions t
+    JOIN
+      manga m ON t.Manga_Id = m.Manga_Id
+    JOIN
+      payments p ON t.Payment_Id = p.Payment_Id
+    WHERE
+      p.Payment_Name IN ('Debit', 'Credit Card')
+    GROUP BY
+      t.Customer_Id,
+      t.Payment_Id
+  ) t ON c.Customer_Id = t.Customer_Id
+GROUP BY
+  c.Customer_Id,
+  c.Customer_Name;
+
+-- no 20
+SELECT
+  s.Store_Address AS StoreAddress,
+  CONCAT('$', ROUND(SUM(m.Manga_Price) / COUNT(t.Transaction_Id), 2)) AS "Average Income",
+  COUNT(t.Transaction_Id) AS "Total Transactions"
+FROM
+  stores s
+JOIN
+  transactions t ON s.Store_Id = t.Store_Id
+JOIN
+  staff st ON t.Staff_Id = st.Staff_Id
+JOIN
+  manga m ON t.Manga_Id = m.Manga_Id
+WHERE
+  DATENAME(WEEKDAY, st.Staff_HiredDate) = 'Tuesday'
+  AND SUBSTRING(s.Store_Id, LEN(s.Store_Id), 1) % 2 = 1
+GROUP BY
+  s.Store_Address;
